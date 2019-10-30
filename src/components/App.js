@@ -1,25 +1,16 @@
-import React from 'react';
-import UserCreate from './UserCreate';
-import LanguageContext from '../contexts/LanguageContext';
-import LanguageSelector from './LanguageSelector';
-
-class App extends React.Component {
-	state={language: 'english'}
-
-	onLanguageChange = (language) => {
-		this.setState({language})
-	}
-
-	render(){
-		return (
-			<div className='ui container'>
-				<LanguageSelector onLanguageChange={this.onLanguageChange}/>
-				<LanguageContext.Provider value={this.state.language}>
-					<UserCreate />
-				</LanguageContext.Provider>
+import React, {useState} from 'react';
+import ResourceList from './ResourceList'
+const App = (props) => {
+	const [resource, setResource] = useState('posts')
+	return (
+		<div className='ui container'>
+			<div>
+		 		<button className='ui button primary' onClick={()=> setResource('posts')}>Post</button>
+		 		<button className='ui button primary'onClick={()=> setResource('todos')}>Todos</button>
+		 		<ResourceList resource={resource} />
 			</div>
-		)
-	}
+		</div>
+	)
 }
 
 export default App
